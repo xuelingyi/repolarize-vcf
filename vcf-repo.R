@@ -65,4 +65,4 @@ write.table(mydata, "repolarized-data.vcf", row.names=F, quote=F, sep="\t")
 
 ## NOTE: the header lines are not included in the output file; to make the real vcf file:
 ### add the # in front of the header line
-### copy the first 15 lines in the original vcf data into the repolarized data
+### copy the first few lines (all starting with ##) in the original vcf data into the repolarized data
