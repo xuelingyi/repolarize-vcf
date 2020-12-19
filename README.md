@@ -8,7 +8,7 @@ To repolarize the vcf file, the heterozygous sites in the outgroup cannot be use
 
 ## input file
 This code was created for the vcf file of diploid individuals and biallelic SNP loci. The input file should have no missing data. There should be only one outgroup sample and this outgroup sample should be the last one in the vcf file (i.e. the last column). 
-# NOTE: The vcf file needs to be modified before running the codes. To include the header lines, delete the # in the beginning of the vcf header line (i.e. in line 15, change #CHROM to CHROM). This can be done using the Notepad ++ or the unix nano command etc. Save the modified file and name it as myvcf.vcf. Put this file and the R script in the same directory to run the script.  
+Note that he vcf file needs to be modified before running the codes. To include the header lines, delete the # in the beginning of the vcf header line (i.e. in line 15, change #CHROM to CHROM). This can be done using the Notepad ++ or the unix nano command etc. Save the modified file and name it as myvcf.vcf. Put this file and the R script in the same directory to run the script.  
 
 ## output file
 The script will output a file called mydata.vcf. All ingroup smaples are output in the original order, and the outgroup sample will be excluded. The number of loci kept in this file will be printed on the screen. Note that this file is not in the vcf format because the first 14 lines are not included. To make it into the vcf format, first add the # back in front of the header line (e.g. change CHROM to #CHROM). Second, copy the first 14 lines (all start with ##) in the original vcf data into the repolarized data. Again this can easily be done in Notepad or unix. 
