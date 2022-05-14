@@ -1,6 +1,7 @@
 # repolarize-vcf
-This code repolarizes a vcf file using one outgroup sample's genotypes as the ancestral state. 
-#### the code was wirtten for an ongoing project ####
+This script repolarizes a vcf file using one outgroup sample's genotypes as the ancestral state. 
+
+The script was wirtten for the project published as: Yi, X., & Latch, E. K. (2022) Nuclear phylogeography reveals strong impacts of gene flow in big brown bats. Journal of Biogeography, 49(6), 1061– 1074. https://doi.org/10.1111/jbi.14362
 
 When the ingroup and outgroup samples are genotyped by mapping to the same reference genome, such as the one of the ingroup species, the identified genotypes may not be polarized correctly in the vcf file, because the ancestral allele is the allele of the ingroup's reference genome, rather than that of the outgroup. However, when the outgroup sample is available, their genotypes can also indicate the ancestral condition, and thus the vcf file can be repolarized so that the information of ancestral/derived alleles can be used to calculate the derived site frequency spectrum (DSFS) for some analyses such as demography. 
 
