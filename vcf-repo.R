@@ -2,7 +2,7 @@
 # the goal is to used the repolarized vcf file to generate the derived site frequency spectrum (DSFS) for demographic analyses
 #### the code was wirtten for an ongoing project ####
 
-repolarizeVCF = function(vcf_file="mydata.vcf", outgroup_indv="sample01", out_file="repolarized.vcf", ...) {
+repolarizeVCF = function(vcf_file="mydata.vcf", vcf.FORMAT = "GT:DP:AD:GQ:GL", outgroup_indv="sample01", out_file="repolarized.vcf", ...) {
 
 	myvcf = read.table(vcf_file)
 	
@@ -46,16 +46,21 @@ repolarizeVCF = function(vcf_file="mydata.vcf", outgroup_indv="sample01", out_fi
 		
 			data = unlist(strsplit(ingroup[i, j], split=":"))
 
-			GT = unlist(strsplit(data[1], split="/"))  # change the genotypes from 1 to 0 or 0 to 1 
-			GT[1] = as.character(1-as.numeric(GT[1]))
-			GT[2] = as.character(1-as.numeric(GT[2]))
-			data[1] = paste(GT[1],GT[2],sep="/")
-
-			AD = unlist(strsplit(data[3], split=","))  # change the order of the allele depths
-			data[3] = paste(AD[2],AD[1],sep=",")
-
-			GL = unlist(strsplit(data[5], split=","))  # change the order of the genotype likelihoods (only two alleles, so three genotypes)
-			data[5] = paste(GL[3],GL[2],GL[1],sep=",")
+			vcf.FORMAT = unlist(strsplit(vcf.FORMAT, split=":"))
+			
+			n.GT = match("GT", vcf.FORMAT)
+      			GT = unlist(strsplit(data[n.GT], split="/"))  # change the genotypes from 1 to 0 or 0 to 1 
+      			GT[1] = as.character(1-as.numeric(GT[1]))
+      			GT[2] = as.character(1-as.numeric(GT[2]))
+      			data[n.GT] = paste(GT[1],GT[2],sep="/")
+			
+			n.AD = match("AD", vcf.FORMAT)
+   		        AD = unlist(strsplit(data[n.AD], split=","))  # change the order of the allele depths
+      			data[n.AD] = paste(AD[2],AD[1],sep=",")
+      
+      			n.GL = match("GL", vcf.FORMAT)
+      			GL = unlist(strsplit(data[n.GL], split=","))  # change the order of the genotype likelihoods (only two alleles, so three genotypes)
+      			data[n.GL] = paste(GL[3],GL[2],GL[1],sep=",")
 
 			ingroup[i, j] = paste(data, collapse=":")
 		}
